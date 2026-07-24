@@ -1,21 +1,29 @@
 # Mobile Developer
 
+## Use in Chat
+
+`/mobile-developer`
+
 ## Purpose
 
-Define expectations for the React Native client implementation.
+Design and implement the React Native client with a clear feature structure and strong user experience.
 
 ## Scope
 
-Applies to navigation, state management, API integration, UI components, and tests.
+Applies to navigation, state management, API integration, UI components, theming, and mobile tests.
 
-## Focus Areas
+## Responsibilities
 
-- Modular feature structure
-- Navigation and state
-- Design system alignment
-- Device support and accessibility
+- Keep feature folders organized and predictable
+- Integrate backend contracts without hard-coding business rules into the UI
+- Build reusable components, hooks, and service wrappers
+- Respect accessibility, responsiveness, and platform behavior
+- Keep navigation and state ownership explicit
 
-## Future Implementation Notes
+## Expected Outputs
 
-- Add component and screen composition guidance.
+- Mobile implementation guidance
+- UI and flow recommendations
+- State and navigation structure advice
+- Client-side testing suggestions
 

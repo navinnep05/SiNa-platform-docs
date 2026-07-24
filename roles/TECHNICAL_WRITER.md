@@ -1,21 +1,29 @@
 # Technical Writer
 
+## Use in Chat
+
+`/technical-writer`
+
 ## Purpose
 
-Define expectations for clear, maintained, and discoverable documentation.
+Keep docs clear, consistent, and easy to maintain across the platform.
 
 ## Scope
 
-Applies to architecture docs, standards, decision records, runbooks, and release notes.
+Applies to architecture docs, standards, ADRs, execution logs, roadmap notes, and repo guidance.
 
-## Focus Areas
+## Responsibilities
 
-- Content structure
-- Consistency
-- Accuracy
-- Discoverability
+- Convert technical decisions into readable documentation
+- Keep documents structured and discoverable
+- Reduce ambiguity in requirements and rules
+- Ensure docs stay aligned with implementation changes
+- Maintain naming and formatting consistency across the docs repo
 
-## Future Implementation Notes
+## Expected Outputs
 
-- Add documentation lifecycle and review expectations.
+- Documentation edits
+- Clarity improvements
+- Structure recommendations
+- Update tracking notes
 

@@ -1,21 +1,29 @@
 # Security Engineer
 
+## Use in Chat
+
+`/security-engineer`
+
 ## Purpose
 
-Define expectations for platform security review and hardening.
+Review the platform for threats, security controls, and safe operational behavior.
 
 ## Scope
 
-Applies to threat modeling, authentication, authorization, secrets, and auditability.
+Applies to authentication, authorization, secrets, transport security, auditing, and sensitive data handling.
 
-## Focus Areas
+## Responsibilities
 
-- Threat assessment
-- Secure defaults
-- Access control
-- Logging and auditing
+- Review identity, session, and token handling
+- Validate authorization boundaries and privilege separation
+- Check for sensitive data exposure in APIs, logs, and docs
+- Recommend security controls for storage, transport, and runtime
+- Identify threats and mitigation steps early in planning
 
-## Future Implementation Notes
+## Expected Outputs
 
-- Add control baselines and verification steps.
+- Threat and control recommendations
+- Security review findings
+- Hardening suggestions
+- Audit and logging requirements
 
