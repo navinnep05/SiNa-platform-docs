@@ -17,33 +17,38 @@ Applies to all backend, mobile, documentation, and release work.
 - Release Branches
 - Naming Rules
 
-## Placeholder Sections
+## Long-Lived Branches
 
-### Long-Lived Branches
+- `main` is the stable branch that tracks reviewed work.
+- `develop` is not required for this setup and should only be introduced by team agreement.
 
-Placeholder guidance for `main` and `develop`.
+## Feature Branches
 
-### Feature Branches
+- Use `feature/*` for normal feature work.
+- When a feature touches backend and mobile, use matching branch names in both repos.
+- When a feature touches docs plus an implementation repo, keep the docs branch name aligned with the implementation branch name.
 
-Placeholder guidance for `feature/*` work across backend and mobile.
+## Bugfix Branches
 
-### Bugfix Branches
+- Use `bugfix/*` for non-urgent fixes.
+- Keep bugfix branches narrow and easy to review.
 
-Placeholder guidance for `bugfix/*` work.
+## Hotfix Branches
 
-### Hotfix Branches
+- Use `hotfix/*` for urgent production fixes.
+- Keep hotfix changes minimal and well documented.
 
-Placeholder guidance for urgent production fixes.
+## Release Branches
 
-### Release Branches
+- Use `release/*` for stabilization and release prep.
+- Only create release branches when the team needs a formal freeze window.
 
-Placeholder guidance for stabilization work.
+## Naming Rules
 
-### Naming Rules
-
-Placeholder guidance for branch naming conventions.
+- Prefer lowercase branch names with hyphens.
+- Keep the branch name readable and tied to the business feature.
+- Avoid repo-specific names inside the branch name unless the work is repo-specific.
 
 ## Future Implementation Notes
 
 - Clarify branch lifetime and merge sequence when CI is in place.
-
