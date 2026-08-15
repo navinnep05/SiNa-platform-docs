@@ -2,48 +2,61 @@
 
 ## Purpose
 
-Define how errors should be raised, translated, and returned.
+Define how errors are raised, translated, and returned.
 
 ## Scope
 
-Applies to backend code, API responses, and future client-side error handling patterns.
+Backend domain errors, validation, and API responses. Mobile error display follows backend codes.
 
-## Table of Contents
+## Principles
 
-- Principles
-- Domain Errors
-- Validation Errors
-- System Errors
-- API Mapping
-- Recovery Guidance
+- Fail with explicit domain exceptions — do not return null for error cases
+- Map all handled exceptions in `GlobalExceptionHandler` — one HTTP status per exception type
+- Use stable `errorCode` strings consumed by mobile
+- Include `traceId` on every API error response
 
-## Placeholder Sections
+## Domain Errors
 
-### Principles
+Throw typed exceptions from services:
 
-Placeholder guidance for predictable failure handling.
+| Exception | HTTP | Example codes |
+| --- | --- | --- |
+| `ValidationException` | 400 | `INVALID_INPUT` |
+| `InvalidStateTransitionException` | 409 | booking transition violations |
+| `ConflictException` | 409 | duplicate resource |
+| `ForbiddenOperationException` | 403 | unverified driver action |
+| `NotFoundException` | 404 | missing booking/vehicle |
+| `RateLimitExceededException` | 429 | OTP throttling |
 
-### Domain Errors
+Keep messages user-safe — no stack traces in responses.
 
-Placeholder guidance for business rule violations.
+## Validation Errors
 
-### Validation Errors
+- Bean validation → `VALIDATION_ERROR` with `fieldErrors` list
+- One message per field in `FieldViolationResponse`
 
-Placeholder guidance for input validation failures.
+## System Errors
 
-### System Errors
+- Uncaught exceptions → `500` with generic message; log full stack server-side only
+- Do not expose internal class names or SQL in API responses
 
-Placeholder guidance for infrastructure and dependency failures.
+## API Mapping
 
-### API Mapping
+Implementation: `com.driverbooking.backend.common.error.GlobalExceptionHandler`.
 
-Placeholder guidance for translating exceptions to HTTP responses.
+Mobile: map `errorCode` in `src/auth/formatApiError.ts` for user-facing copy.
 
-### Recovery Guidance
+## Recovery Guidance
 
-Placeholder guidance for retriable versus non-retriable failures.
+| Error | Client action |
+| --- | --- |
+| 401 | Clear session; return to auth |
+| 409 booking | Refresh booking state from server |
+| 429 OTP | Show wait/retry message |
+| 500 | Retry once; then show generic failure |
 
-## Future Implementation Notes
+Retriable: transient network errors. Non-retriable: validation, auth, state conflicts.
 
-- Add a canonical error envelope once API design is finalized.
+## Related
 
+- [API_STANDARDS.md](./API_STANDARDS.md)

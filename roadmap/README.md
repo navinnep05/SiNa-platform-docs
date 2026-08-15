@@ -1,12 +1,12 @@
 # Roadmap
 
-This folder tracks intended platform sequencing, delivery milestones, and governance-driven priorities.
+Platform delivery sequencing and milestones.
 
-## Future Sections
+**Canonical doc:** [ROADMAP.md](./ROADMAP.md)
 
-- Near-term milestones
-- Backend delivery roadmap
-- Mobile delivery roadmap
-- Shared architecture milestones
-- Release readiness checkpoints
+## Related
 
+- [implementation/](../docs/delivery/implementation/) — phase build status (PRD → code → tests)
+- [READINESS_CHECKLIST.md](../docs/product/READINESS_CHECKLIST.md) — Phase 1 exit gate
+- [PRD-0001](../docs/product/prd/PRD-0001-driver-hiring-application.md)
+- [execution-log/](../execution-log/) — dated delivery progress notes

@@ -19,6 +19,7 @@ Applies to the three-repo Driver Booking platform setup:
 - Commit Discipline
 - Merge Expectations
 - Documentation Updates
+- Push Control
 
 ## Branch Types
 
@@ -52,9 +53,15 @@ Applies to the three-repo Driver Booking platform setup:
 ## Documentation Updates
 
 - Update the docs repo whenever requirements, flows, architecture decisions, or repo boundaries change.
+- Update the relevant row in `docs/delivery/implementation/PHASE-*-IMPLEMENTATION.md` when a phase-scoped feature lands in backend or mobile.
 - Record notable delivery progress in `execution-log/`.
 - Record irreversible architectural choices in `decisions/`.
 - Keep repo-local `AGENTS.md` files pointing back to the docs repo as the source of truth.
+
+## Push Control
+
+- Do not push any repository changes until the user explicitly says to push.
+- Prepare commits locally first, then wait for an explicit push instruction.
 
 ## Future Implementation Notes
 
