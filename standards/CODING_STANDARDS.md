@@ -2,54 +2,54 @@
 
 ## Purpose
 
-Define baseline expectations for code quality, readability, and maintainability.
+Baseline expectations for code quality, readability, and maintainability.
 
 ## Scope
 
-Applies to backend, mobile, shared utilities, and supporting scripts.
+Backend (Java), mobile (TypeScript/React Native), and shared documentation.
 
-## Table of Contents
+## General Principles
 
-- General Principles
-- Readability
-- Reuse
-- Layering
-- Testing
-- Documentation
-- Review Expectations
+- Match existing patterns in the file you are editing
+- Prefer small, focused changes over drive-by refactors
+- Keep business rules in services/domain — not in controllers or screen components
+- One capability per class/function where practical
 
-## Placeholder Sections
+## Readability
 
-### General Principles
+- Use descriptive names over abbreviations
+- Keep methods short; extract when nesting exceeds two levels
+- Avoid commented-out code in merged branches
+- Format with project defaults (Java: standard; mobile: ESLint + Prettier via RN config)
 
-Placeholder guidance for consistent engineering practices.
+## Reuse
 
-### Readability
+- Extract duplication only when used twice or more with the same semantics
+- Do not create one-line utility wrappers
+- Share booking/status logic via documented mappers — see [BOOKING_STATUS_MAPPING.md](../docs/architecture/BOOKING_STATUS_MAPPING.md)
 
-Placeholder guidance for formatting, naming, and structure.
+## Layering
 
-### Reuse
+**Backend:** `api` → `service` → `repository` → `domain`. DTOs at the API boundary only.
 
-Placeholder guidance for avoiding duplication.
+**Mobile:** screens render; `src/state/flow.tsx` and `src/services/*` own behavior and API calls.
 
-### Layering
+Cross-repo: no booking or verification business rules duplicated in mobile that are not also enforced on the backend.
 
-Placeholder guidance for keeping dependencies aligned with architecture.
+## Testing
 
-### Testing
+- Add tests for new service logic and state transitions
+- Test failure paths — auth denied, invalid transitions, validation errors
+- See [TESTING.md](../docs/delivery/TESTING.md)
 
-Placeholder guidance for testability and verification.
+## Documentation
 
-### Documentation
+- Update OpenAPI + mobile `api.ts` when changing contracts
+- Update flow/ADR docs when behavior changes
+- Update [docs/README.md](../docs/README.md) when adding docs
 
-Placeholder guidance for keeping docs current with code.
+## Review Expectations
 
-### Review Expectations
+Every PR should be readable by a teammate without a walkthrough. If a change needs a diagram to explain, add it to the docs repo.
 
-Placeholder guidance for code review quality bars.
-
-## Future Implementation Notes
-
-- Replace placeholders with team-specific examples.
-- Link to platform-specific style references where needed.
-
+See [CODE_REVIEW_CHECKLIST.md](./CODE_REVIEW_CHECKLIST.md).

@@ -2,20 +2,39 @@
 
 ## Purpose
 
-Capture notification delivery guidance across push and transactional channels.
+Notification delivery across push and in-app inbox.
 
 ## Scope
 
-Applies to event triggers, templates, delivery retries, and user preferences.
+Event triggers, templates, backend module, and mobile inbox UI.
 
-## Focus Areas
+## Architecture
 
-- Delivery semantics
-- Template structure
-- Retry policy
-- Preference handling
+- **Notification domain module** (backend) owns delivery history and inbox state
+- **Firebase** delivers push to device — [FIREBASE.md](./FIREBASE.md)
+- Chat new-message awareness via push; message body fetched via REST polling ([ADR-0005](../decisions/ADR-0005-chat-transport-v1-rest-polling.md))
 
-## Future Implementation Notes
+## Event Examples
 
-- Add message routing and channel ownership notes.
+| Event | Push | In-app inbox |
+| --- | --- | --- |
+| Booking request to driver | Yes | Yes |
+| Booking accepted | Yes | Yes |
+| Verification approved/rejected | Yes | Yes |
+| Booking expired | Yes | Yes |
+| New chat message | Yes | Via chat poll |
 
+## Mobile
+
+- `src/notifications/` — inbox list and read state
+- Deep links to relevant screen where implemented
+
+## Backend
+
+- Persist notification records per user
+- Idempotent delivery where retry occurs
+- Do not embed secrets or full PII in push payload title/body
+
+## Related
+
+- [SYSTEM_ARCHITECTURE.md](../docs/architecture/SYSTEM_ARCHITECTURE.md)

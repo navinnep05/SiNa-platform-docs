@@ -2,53 +2,55 @@
 
 ## Purpose
 
-Provide a consistent checklist for reviewing changes in the Driver Booking platform repositories.
+Consistent checklist for reviewing changes across the platform repos.
 
-## Scope
+## Correctness
 
-Applies to backend, mobile, documentation, and supporting configuration changes.
+- [ ] Logic matches PRD / flow doc / ADR for the feature
+- [ ] Edge cases handled (empty input, not found, concurrent updates)
+- [ ] Booking state transitions match [BOOKING_STATUS_MAPPING.md](../docs/architecture/BOOKING_STATUS_MAPPING.md)
+- [ ] No silent failures — errors surfaced to caller/user
 
-## Table of Contents
+## Architecture
 
-- Correctness
-- Architecture
-- Security
-- Testing
-- Documentation
-- Maintainability
-- Release Risk
+- [ ] Change respects module boundaries ([ADR-0002](../decisions/ADR-0002-modular-monolith-phase-1.md))
+- [ ] No business rules only in mobile that backend should enforce
+- [ ] Cross-repo contract changes have docs/OpenAPI update in same delivery wave
+- [ ] Escalated to `/solution-architect` if boundary or breaking contract
 
-## Placeholder Sections
+## Security
 
-### Correctness
+- [ ] AuthZ checks on protected resources
+- [ ] No secrets, tokens, or OTP in logs or committed files
+- [ ] Input validated at API boundary
+- [ ] Document upload paths respect [ADR-0004](../decisions/ADR-0004-document-storage-v1.md)
 
-Placeholder guidance for logic, edge cases, and regressions.
+## Testing
 
-### Architecture
+- [ ] New service logic has unit tests
+- [ ] Failure paths tested (401, 403, 409, validation)
+- [ ] `./mvnw verify` or `npm test` passes locally
+- [ ] Manual smoke noted in PR if automation gaps exist
 
-Placeholder guidance for layering and dependency boundaries.
+## Documentation
 
-### Security
+- [ ] OpenAPI + mobile `api.ts` updated if API changed
+- [ ] Flow/ADR/docs updated if behavior changed
+- [ ] [docs/README.md](../docs/README.md) updated if new doc added
 
-Placeholder guidance for auth, secrets, and data exposure.
+## Maintainability
 
-### Testing
+- [ ] Naming follows [NAMING_CONVENTIONS.md](./NAMING_CONVENTIONS.md)
+- [ ] No unnecessary abstraction or duplicate logic
+- [ ] Readable without author present
 
-Placeholder guidance for coverage and verification.
+## Release Risk
 
-### Documentation
+- [ ] Flyway migration backward-safe or rollback plan noted
+- [ ] Mobile build compatible with deployed backend version
+- [ ] Feature flags for incomplete Phase 1b paths if merging incrementally
 
-Placeholder guidance for doc updates and clarity.
+## Related
 
-### Maintainability
-
-Placeholder guidance for readability and reuse.
-
-### Release Risk
-
-Placeholder guidance for rollout and compatibility concerns.
-
-## Future Implementation Notes
-
-- Expand the checklist with repo-specific review heuristics.
-
+- [CODING_STANDARDS.md](./CODING_STANDARDS.md)
+- [GIT_WORKFLOW.md](./GIT_WORKFLOW.md)

@@ -2,48 +2,55 @@
 
 ## Purpose
 
-Define consistent logging behavior for diagnostics, auditing, and supportability.
+Consistent logging for diagnostics, support, and security auditing.
 
 ## Scope
 
-Applies to backend services, mobile diagnostics, and operational tooling.
+Backend services (primary). Mobile: debug logs in dev only; no sensitive data in production logs.
 
-## Table of Contents
+## Log Levels
 
-- Log Levels
-- Structure
-- Sensitive Data
-- Correlation
-- Error Logging
-- Audit Logging
+| Level | Use |
+| --- | --- |
+| ERROR | Unhandled failures, data corruption risk, external dependency down |
+| WARN | Handled domain failures, rate limits, retryable dependency errors |
+| INFO | Startup, migration success, major business events (booking accepted) |
+| DEBUG | Request flow detail — dev/local only |
+| TRACE | Avoid in production |
 
-## Placeholder Sections
+## Structure
 
-### Log Levels
+- Prefer structured key-value logs where the backend logging stack supports it
+- Include: `traceId`, `userId` (if authenticated), `bookingId` / entity ID when relevant
+- Use consistent event names: `booking.accepted`, `verification.approved`
 
-Placeholder guidance for when to use each level.
+## Sensitive Data
 
-### Structure
+**Never log:** passwords, OTP codes, JWT tokens, DL/RC document content, full phone numbers in production.
 
-Placeholder guidance for structured logging patterns.
+Mask identifiers in INFO logs when possible (e.g. last 4 digits of mobile).
 
-### Sensitive Data
+## Correlation
 
-Placeholder guidance for redaction and privacy.
+- Generate/propagate `traceId` per request — returned in `ApiErrorResponse`
+- Mobile may send a client request ID header in future; backend traceId is canonical for support today
 
-### Correlation
+## Error Logging
 
-Placeholder guidance for request and trace correlation.
+- Log stack traces at ERROR for unexpected exceptions
+- Log handled domain failures at WARN with `errorCode`, not full stack
+- Do not double-log the same exception at ERROR and WARN
 
-### Error Logging
+## Audit Logging
 
-Placeholder guidance for exception logging practices.
+Record at INFO (or dedicated audit sink later):
 
-### Audit Logging
+- Admin verification approve/reject with reason
+- Booking state transitions with actor role
+- Account registration and OAuth link events
 
-Placeholder guidance for important business events.
+Retention policy TBD — keep audit fields in DB even when soft-deleting entities ([DATABASE_DESIGN.md](../docs/architecture/DATABASE_DESIGN.md)).
 
-## Future Implementation Notes
+## Related
 
-- Add example log payloads and masking rules.
-
+- [SECURITY.md](../docs/architecture/SECURITY.md)

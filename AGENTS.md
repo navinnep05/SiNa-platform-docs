@@ -12,5 +12,4 @@ This repository is the source of truth for Driver Booking platform governance.
 
 ## Scope
 
-- Applies to `docs/`, `standards/`, `roles/`, `skills/`, `prompts/`, `decisions/`, `execution-log/`, and `roadmap/`.
-
+- Applies to `docs/`, `standards/`, `roles/`, `skills/`, `decisions/`, `execution-log/`, and `roadmap/`.

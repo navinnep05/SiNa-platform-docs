@@ -1,5 +1,7 @@
 # Roles
 
+All roles in this repository follow the shared senior response standard in [`SENIOR_RESPONSE_STANDARD.md`](./SENIOR_RESPONSE_STANDARD.md).
+
 Use these role references in chat with a leading slash, for example:
 
 - `/solution-architect`
@@ -15,16 +17,17 @@ Use these role references in chat with a leading slash, for example:
 
 ## How to use
 
-When you want a response from a particular point of view, start your message with the role alias or mention it directly in the request.
+Start the message with the role alias, then state the task.
 
 Examples:
 
 - `/backend-developer review this API contract`
-- `/solution-architect help me split this feature across repos`
+- `/solution-architect split this feature across docs, backend, and mobile`
 - `/qa-engineer define acceptance criteria for this flow`
 
 ## Role Files
 
+- `SENIOR_RESPONSE_STANDARD.md`
 - `SOLUTION_ARCHITECT.md`
 - `BACKEND_DEVELOPER.md`
 - `MOBILE_DEVELOPER.md`
